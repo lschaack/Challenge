@@ -5,7 +5,7 @@
 	"use strict";
 	// quickly avoiding null error, would fix better w/more time
 	var area;
-	const shapes[];
+	// const shapes[];
 
 	window.onload = function() {
 		document.getElementById('shape-button').onclick = createShape;
