@@ -11,6 +11,17 @@ button {
 	z-index: 1;
 }
 
+input {
+	margin: 0 auto;
+	display: block;
+	position: relative;
+	z-index: 1;
+}
+
+p {
+	text-align: center;
+}
+
 #shape-area {
 	position: relative;
 	z-index: 0;

@@ -15,6 +15,7 @@
 		newShape.onclick = reportInfo;
 		newShape.className = 'shape'; // make sure this line is actually necessary
 		setRandomProperties(newShape);
+		addText(newShape);
 		area.appendChild(newShape); // area.appendChild(newShape); // WATCH OUT FOR THIS
 		return newShape;
 	}
@@ -37,6 +38,13 @@
 		shape.style.backgroundColor = '#' + color;
 	}
 
+	function addText(shape) {
+		var text = document.getElementById('text-field').value;
+		var field = document.createElement('p');
+		field.innerHTML = text; // maybe just .innerHTML
+		shape.appendChild(field)
+	}
+
 	function clearAll() {
 		while (area.firstChild) {
 		    area.removeChild(area.firstChild);
@@ -46,6 +54,7 @@
 	function reportInfo() {
 		var style = window.getComputedStyle(this, null);
 		var color = style.getPropertyValue('background-color')
-		alert('Color: ' + color + ', text: '); // add text also
+		var text = this.firstChild.innerHTML;
+		alert('Color: ' + color + ', text: ' + text); // add text also
 	}
 })();
