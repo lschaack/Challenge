@@ -1,7 +1,11 @@
+// Lucas Schaack
+// Clover Web Dev Internship Challenge
+
 (function() {
 	"use strict";
 	// quickly avoiding null error, would fix better w/more time
 	var area;
+	const shapes[];
 
 	window.onload = function() {
 		document.getElementById('shape-button').onclick = createShape;
@@ -9,6 +13,49 @@
 		area = document.getElementById('shape-area');
 	};
 
+	/*
+	 * Attempted large shift to class-based shapes to make velocity updating (and everything really)
+	 * much easier, but couldn't get it done in the time allotted. Hopefully it's apparent where I
+	 * was going with this. 
+	*/
+	class shape {
+		constructor(sideLength, radius, top, left, color, vX, vY) {
+			this.sideLength = sideLength;
+			this.radius = radius;
+			this.top = top;
+			this.left = left;
+			this.color = color;
+			this.vX = vX;
+			this.vY = vY;
+			this.updateLocation();
+		}
+
+		updateLocation() {
+			newHorizPos = this.left + vX;
+			newVertiPos = this.top - vY;
+			vertiCollision = (newHorizPos > 0 &&
+								 newHorizPos + this.sideLength < window.innerWidth);
+			horizCollision = (newVertiPos > 0 &&
+								   newVertiPos + this.sideLength < window.innerHeight);
+			if (!vertiCollision && !horizCollision) {
+				this.top -= vY;
+				this.left += vX;
+			} else {
+				collide(vertiCollision, horizCollision);
+			}
+		}
+
+		collide(vertiCollision, horizCollision) {
+			if (vertiCollision) {
+				this.vY = -this.vY;
+			}
+			if (horizCollision) {
+				this.vX = -this.vX;
+			}
+		}
+	}
+
+	// with shape class, would push new shape onto the global shapes array once properties were set.
 	function createShape() {
 		// var area = document.getElementById('shape-area');
 		var newShape = document.createElement('div');
@@ -55,6 +102,6 @@
 		var style = window.getComputedStyle(this, null);
 		var color = style.getPropertyValue('background-color')
 		var text = this.firstChild.innerHTML;
-		alert('Color: ' + color + ', text: ' + text); // add text also
+		alert('Color: ' + color + ', text: ' + text);
 	}
 })();
